@@ -11,7 +11,6 @@ public static class DbSeeder
         var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
         var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
 
-        context.Database.EnsureCreated();
 
         // Crear rol Analista
         if (!await roleManager.RoleExistsAsync("Analista"))
