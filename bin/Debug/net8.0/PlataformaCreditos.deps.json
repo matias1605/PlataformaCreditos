@@ -12,7 +12,7 @@
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "8.0.20",
           "Microsoft.AspNetCore.Identity.UI": "8.0.20",
           "Microsoft.EntityFrameworkCore.Sqlite": "8.0.20",
-          "Microsoft.EntityFrameworkCore.Tools": "10.0.7"
+          "Microsoft.EntityFrameworkCore.Tools": "8.0.20"
         },
         "runtime": {
           "PlataformaCreditos.dll": {}
@@ -343,7 +343,7 @@
         }
       },
       "Microsoft.EntityFrameworkCore.Analyzers/8.0.20": {},
-      "Microsoft.EntityFrameworkCore.Design/8.0.0": {
+      "Microsoft.EntityFrameworkCore.Design/8.0.20": {
         "dependencies": {
           "Humanizer.Core": "2.14.1",
           "Microsoft.CodeAnalysis.CSharp.Workspaces": "4.5.0",
@@ -353,8 +353,8 @@
         },
         "runtime": {
           "lib/net8.0/Microsoft.EntityFrameworkCore.Design.dll": {
-            "assemblyVersion": "8.0.0.0",
-            "fileVersion": "8.0.23.53103"
+            "assemblyVersion": "8.0.20.0",
+            "fileVersion": "8.0.2025.41910"
           }
         }
       },
@@ -389,9 +389,9 @@
           }
         }
       },
-      "Microsoft.EntityFrameworkCore.Tools/10.0.7": {
+      "Microsoft.EntityFrameworkCore.Tools/8.0.20": {
         "dependencies": {
-          "Microsoft.EntityFrameworkCore.Design": "8.0.0"
+          "Microsoft.EntityFrameworkCore.Design": "8.0.20"
         }
       },
       "Microsoft.Extensions.Caching.Abstractions/8.0.0": {
@@ -881,12 +881,12 @@
       "path": "microsoft.entityframeworkcore.analyzers/8.0.20",
       "hashPath": "microsoft.entityframeworkcore.analyzers.8.0.20.nupkg.sha512"
     },
-    "Microsoft.EntityFrameworkCore.Design/8.0.0": {
+    "Microsoft.EntityFrameworkCore.Design/8.0.20": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-94reKYu63jg4O75UI3LMJHwOSi8tQ6IfubiZhdnSsWcgtmAuF8OyLfjK/MIxuvaQRJZAF6E747FIuxjOtb8/og==",
-      "path": "microsoft.entityframeworkcore.design/8.0.0",
-      "hashPath": "microsoft.entityframeworkcore.design.8.0.0.nupkg.sha512"
+      "sha512": "sha512-U5J4BM8Z/EWpLRdK1k8a4Ps/4aMW89agdlvAP+K9xV5pY5yVeldezMEtMP+iKq1fBaf/3SIDLMbo/tVnpgxtnA==",
+      "path": "microsoft.entityframeworkcore.design/8.0.20",
+      "hashPath": "microsoft.entityframeworkcore.design.8.0.20.nupkg.sha512"
     },
     "Microsoft.EntityFrameworkCore.Relational/8.0.20": {
       "type": "package",
@@ -909,12 +909,12 @@
       "path": "microsoft.entityframeworkcore.sqlite.core/8.0.20",
       "hashPath": "microsoft.entityframeworkcore.sqlite.core.8.0.20.nupkg.sha512"
     },
-    "Microsoft.EntityFrameworkCore.Tools/10.0.7": {
+    "Microsoft.EntityFrameworkCore.Tools/8.0.20": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-Ui7+Y+E2KwwQvRlbOclMP8HAGXrQFQcOu3NLpKlYdmd5pbhlueyLhnW3SBv1WuXALKESGHR3lMqeANNnl/02Bw==",
-      "path": "microsoft.entityframeworkcore.tools/10.0.7",
-      "hashPath": "microsoft.entityframeworkcore.tools.10.0.7.nupkg.sha512"
+      "sha512": "sha512-88Kfqg2BAb8l+aH3vHeCQGlcZ/sFGpc/6jm7ejH14WHRfV1VNebb9AvPPucqCM5ZFj+txc+xHkdgW9UzLkA8Dg==",
+      "path": "microsoft.entityframeworkcore.tools/8.0.20",
+      "hashPath": "microsoft.entityframeworkcore.tools.8.0.20.nupkg.sha512"
     },
     "Microsoft.Extensions.Caching.Abstractions/8.0.0": {
       "type": "package",

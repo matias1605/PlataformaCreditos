@@ -25,7 +25,6 @@ public class ApplicationDbContext : IdentityDbContext<IdentityUser>
             .Property(s => s.MontoSolicitado)
             .HasPrecision(18, 2);
 
-        // Un cliente -> muchas solicitudes
         builder.Entity<Cliente>()
             .HasMany(c => c.Solicitudes)
             .WithOne(s => s.Cliente)

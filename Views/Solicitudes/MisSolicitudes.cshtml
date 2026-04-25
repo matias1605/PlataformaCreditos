@@ -1,0 +1,67 @@
+@model PlataformaCreditos.Models.ViewModels.SolicitudFiltroViewModel
+
+@{
+    ViewData["Title"] = "Mis Solicitudes";
+}
+
+<h2>Mis Solicitudes</h2>
+
+<form method="get" asp-action="MisSolicitudes">
+    <div class="row g-2 mb-3">
+        <div class="col-md-2">
+            <label>Estado</label>
+            <select name="estado" class="form-select">
+                <option value="">Todos</option>
+                <option value="Pendiente" selected="@(Model.Estado=="Pendiente")">Pendiente</option>
+                <option value="Aprobado" selected="@(Model.Estado=="Aprobado")">Aprobado</option>
+                <option value="Rechazado" selected="@(Model.Estado=="Rechazado")">Rechazado</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <label>Monto Mín</label>
+            <input name="montoMin" type="number" class="form-control" value="@Model.MontoMin" />
+        </div>
+        <div class="col-md-2">
+            <label>Monto Máx</label>
+            <input name="montoMax" type="number" class="form-control" value="@Model.MontoMax" />
+        </div>
+        <div class="col-md-2">
+            <label>Fecha Desde</label>
+            <input name="fechaDesde" type="date" class="form-control" value="@Model.FechaDesde?.ToString("yyyy-MM-dd")" />
+        </div>
+        <div class="col-md-2">
+            <label>Fecha Hasta</label>
+            <input name="fechaHasta" type="date" class="form-control" value="@Model.FechaHasta?.ToString("yyyy-MM-dd")" />
+        </div>
+        <div class="col-md-2 align-self-end">
+            <button type="submit" class="btn btn-primary w-100">Filtrar</button>
+        </div>
+    </div>
+</form>
+
+@if (Model.ErrorFecha != null)
+{
+    <div class="alert alert-danger">@Model.ErrorFecha</div>
+}
+
+<table class="table table-striped">
+    <thead>
+        <tr><th>ID</th><th>Monto</th><th>Fecha</th><th>Estado</th><th>Acciones</th></tr>
+    </thead>
+    <tbody>
+        @foreach (var s in Model.Solicitudes)
+        {
+            <tr>
+                <td>@s.Id</td>
+                <td>S/ @s.MontoSolicitado.ToString("N2")</td>
+                <td>@s.FechaSolicitud.ToString("dd/MM/yyyy")</td>
+                <td>
+                    <span class="badge @(s.Estado == EstadoSolicitud.Aprobado ? "bg-success" : s.Estado == EstadoSolicitud.Rechazado ? "bg-danger" : "bg-warning text-dark")">
+                        @s.Estado
+                    </span>
+                </td>
+                <td><a asp-action="Detalle" asp-route-id="@s.Id" class="btn btn-sm btn-outline-primary">Ver</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
