@@ -84,4 +84,71 @@ public class SolicitudesController : Controller
         if (solicitud == null) return NotFound();
         return View(solicitud);
     }
+    // GET: Solicitudes/Nueva
+public IActionResult Nueva()
+{
+    return View(new NuevaSolicitudViewModel());
+}
+
+// POST: Solicitudes/Nueva
+[HttpPost]
+[ValidateAntiForgeryToken]
+public async Task<IActionResult> Nueva(NuevaSolicitudViewModel vm)
+{
+    if (!ModelState.IsValid)
+        return View(vm);
+
+    // Validación: monto no negativo (ya cubierto por Range, pero explícito)
+    if (vm.MontoSolicitado <= 0)
+    {
+        ModelState.AddModelError("MontoSolicitado", "El monto debe ser mayor a 0.");
+        return View(vm);
+    }
+
+    var userId = _userManager.GetUserId(User);
+    var cliente = await _context.Clientes
+        .Include(c => c.Solicitudes)
+        .FirstOrDefaultAsync(c => c.UsuarioId == userId);
+
+    // Validación: cliente debe existir y estar activo
+    if (cliente == null || !cliente.Activo)
+    {
+        vm.Mensaje = "Tu cuenta de cliente no está activa o no existe.";
+        vm.Exito = false;
+        return View(vm);
+    }
+
+    // Validación: no más de una solicitud Pendiente
+    bool tienePendiente = cliente.Solicitudes.Any(s => s.Estado == EstadoSolicitud.Pendiente);
+    if (tienePendiente)
+    {
+        vm.Mensaje = "Ya tienes una solicitud en estado Pendiente. Espera a que sea procesada.";
+        vm.Exito = false;
+        return View(vm);
+    }
+
+    // Validación: monto no puede superar 10 veces los ingresos
+    if (vm.MontoSolicitado > cliente.IngresosMensuales * 10)
+    {
+        vm.Mensaje = $"El monto no puede superar 10 veces tus ingresos mensuales (máx: S/ {cliente.IngresosMensuales * 10:N2}).";
+        vm.Exito = false;
+        return View(vm);
+    }
+
+    var solicitud = new SolicitudCredito
+    {
+        ClienteId = cliente.Id,
+        MontoSolicitado = vm.MontoSolicitado,
+        Estado = EstadoSolicitud.Pendiente,
+        FechaSolicitud = DateTime.UtcNow
+    };
+
+    _context.SolicitudesCredito.Add(solicitud);
+    await _context.SaveChangesAsync();
+
+    vm.Mensaje = $"Solicitud registrada exitosamente por S/ {solicitud.MontoSolicitado:N2}.";
+    vm.Exito = true;
+    vm.MontoSolicitado = 0;
+    return View(vm);
+}
 }
